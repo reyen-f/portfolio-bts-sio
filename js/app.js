@@ -534,9 +534,9 @@ const rubriques = {
               ] },
 
               { type: "documents", titre: "Comptes rendus", items: [
-                { titre: "Lab 1 · Synchronisation LDAP entre Active Directory et GLPI", info: "PDF · 18 pages", url: "assets/documents/projets/glpi/glpi-lab1-synchronisation-ldap.pdf" },
-                { titre: "Lab 2 · Gestion des profils et des habilitations", info: "PDF · 24 pages", url: "assets/documents/projets/glpi/glpi-lab2-profils-habilitations.pdf" },
-                { titre: "Lab 3 · Workflow des tickets d'assistance", info: "PDF · 19 pages", url: "assets/documents/projets/glpi/glpi-lab3-workflow-tickets.pdf" }
+                { titre: "Lab 1 · Synchronisation LDAP entre Active Directory et GLPI", info: "PDF · 18 pages", url: "assets/documents/projets/glpi/Rapport_Lab_1.pdf" },
+                { titre: "Lab 2 · Gestion des profils et des habilitations", info: "PDF · 24 pages", url: "assets/documents/projets/glpi/Rapport_Lab_2.pdf" },
+                { titre: "Lab 3 · Workflow des tickets d'assistance", info: "PDF · 19 pages", url: "assets/documents/projets/glpi/Rapport_Lab_3.pdf" }
               ] }
             ]
           }
