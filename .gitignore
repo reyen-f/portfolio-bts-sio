@@ -6,3 +6,6 @@ assets/images/accueil/hologrammes/0*.png
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Notes personnelles (non publiées)
+notes-*.md
