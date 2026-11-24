@@ -1,0 +1,1274 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Site accessible uniquement en tapant son adresse : les moteurs de
+       recherche ne doivent ni l'indexer, ni suivre ses liens, ni en garder
+       de copie. Ne pas bloquer le site dans un robots.txt, sinon Google ne
+       verrait plus cette consigne. -->
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="referrer" content="no-referrer">
+  <title>Portfolio | Reyen Fourati</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="preload" as="image" href="assets/images/accueil/decor.png">
+  <link rel="preload" as="image" href="assets/images/accueil/lumiere.png">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+
+  <style>
+    /* SEPARATEUR ACCUEIL / RUBRIQUES */
+    .sidebar__separator {
+      display: block;
+      flex: 0 0 auto;
+      width: 32px;
+      height: 1px;
+      margin: 4px auto 9px;
+      border: 0;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(129, 220, 255, .75),
+        transparent
+      );
+      box-shadow: 0 0 8px rgba(50, 196, 255, .25);
+      pointer-events: none;
+    }
+
+    /* SEPARATEUR RUBRIQUES / ENGAGEMENT (rouge Croix-Rouge) */
+    .sidebar__separator--engagement {
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 116, 136, .8),
+        transparent
+      );
+      box-shadow: 0 0 8px rgba(255, 116, 136, .3);
+    }
+
+    /* IDENTITE CYBER */
+    .landing__cyber-id {
+      position: absolute;
+      top: 20px;
+      left: 24px;
+      z-index: 20;
+      width: max-content;
+      max-width: calc(100% - 48px);
+      padding: 15px 21px 17px;
+      border: 1px solid rgba(77, 218, 255, .28);
+      border-radius: 8px;
+      background: linear-gradient(
+        125deg,
+        rgba(3, 14, 28, .82),
+        rgba(2, 17, 31, .46)
+      );
+      box-shadow:
+        inset 0 0 18px rgba(0, 184, 255, .05),
+        0 0 24px rgba(0, 170, 255, .1);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      pointer-events: none;
+      opacity: 1;
+      filter: brightness(1);
+      transition:
+        opacity .25s ease,
+        filter .25s ease,
+        transform .25s ease;
+    }
+
+    .landing__cyber-id.is-off {
+      opacity: 0;
+      filter: brightness(0);
+      transform: translateY(-5px);
+    }
+
+    .landing__cyber-id::before,
+    .landing__cyber-id::after {
+      content: "";
+      position: absolute;
+      width: 33px;
+      height: 26px;
+      pointer-events: none;
+    }
+
+    .landing__cyber-id::before {
+      top: -1px;
+      left: -1px;
+      border-top: 2px solid #6cecff;
+      border-left: 2px solid #6cecff;
+      border-radius: 8px 0 0 0;
+    }
+
+    .landing__cyber-id::after {
+      right: -1px;
+      bottom: -1px;
+      border-right: 2px solid #6cecff;
+      border-bottom: 2px solid #6cecff;
+      border-radius: 0 0 8px 0;
+    }
+
+    .landing__cyber-name,
+    .landing__cyber-role {
+      margin: 0;
+      font-family: "Orbitron", sans-serif;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .landing__cyber-name {
+      min-height: 1.35em;
+      font-size: clamp(1.25rem, 2vw, 2rem);
+      font-weight: 800;
+      line-height: 1.35;
+      letter-spacing: .07em;
+      color: #f6fdff;
+      text-shadow: 0 0 12px rgba(124, 235, 255, .32);
+    }
+
+    .landing__cyber-role {
+      margin-top: 6px;
+      min-height: 1.6em;
+      font-size: clamp(.59rem, .84vw, .87rem);
+      font-weight: 500;
+      line-height: 1.6;
+      letter-spacing: .12em;
+      color: #d7f5ff;
+    }
+
+    .cyber-char {
+      display: inline;
+      animation: cyber-char-apparait .24s ease-out both;
+    }
+
+    .cyber-char--surname {
+      color: #6cecff;
+      text-shadow: 0 0 10px rgba(75, 213, 255, .7);
+    }
+
+    @keyframes cyber-char-apparait {
+      0% {
+        opacity: 0;
+        filter: brightness(2.5) blur(2px);
+      }
+      55% {
+        opacity: 1;
+        filter: brightness(2.1) blur(0);
+      }
+      100% {
+        opacity: 1;
+        filter: brightness(1) blur(0);
+      }
+    }
+
+    /* CURSEUR LUMINEUX */
+    .cyber-cursor {
+      display: none;
+      width: 2px;
+      height: .88em;
+      margin-left: 3px;
+      vertical-align: -.1em;
+      background: #b7f8ff;
+      box-shadow:
+        0 0 8px #22d9ff,
+        0 0 15px #22d9ff;
+    }
+
+    .cyber-cursor.is-active {
+      display: inline-block;
+      animation: curseur-clignote .8s steps(1, end) infinite;
+    }
+
+    @keyframes curseur-clignote {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    /* TRAIT LUMINEUX FINAL */
+    .landing__cyber-line {
+      position: relative;
+      width: 72%;
+      height: 2px;
+      margin-top: 9px;
+      background: linear-gradient(
+        90deg,
+        #80eaff,
+        #159dca 48%,
+        transparent
+      );
+      box-shadow: 0 0 10px rgba(26, 205, 255, .55);
+      opacity: 0;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition:
+        transform .8s ease-out,
+        opacity .2s ease;
+    }
+
+    .landing__cyber-id.is-complete .landing__cyber-line {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    .landing__cyber-line::before {
+      content: "";
+      position: absolute;
+      top: -2px;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #d8faff;
+      box-shadow:
+        0 0 9px #36dfff,
+        0 0 18px #00bcff;
+    }
+
+    /* NAVIGATION ACCESSIBLE */
+    #accueil[hidden],
+    #interface[hidden] {
+      display: none !important;
+    }
+
+    .landing__stage .scene-hitboxes {
+      z-index: 30;
+      pointer-events: none;
+    }
+
+    .landing__stage .scene-hotspot {
+      cursor: pointer;
+      pointer-events: auto !important;
+      touch-action: manipulation;
+      /* --pret : défini par bouton dans animations.css,
+         quand son hologramme a fini d'apparaître */
+      animation:
+        boutons-clic-disponibles
+        var(--pret, 3.2s)
+        steps(1, end)
+        both;
+    }
+
+    @keyframes boutons-clic-disponibles {
+      0%, 99% {
+        visibility: hidden;
+      }
+      100% {
+        visibility: visible;
+      }
+    }
+
+    #interface .sidebar__button {
+      cursor: pointer;
+      pointer-events: auto !important;
+    }
+
+    #interface .sidebar__nav {
+      overflow-y: auto;
+    }
+
+    /* LES TROIS CATEGORIES DE PROJETS */
+    .project-group {
+      flex: 0 0 auto;
+      border: 1px solid #314d64;
+      border-radius: 13px;
+      background: #192a3b;
+      overflow: hidden;
+    }
+
+    .project-group.is-active {
+      border-color: #72d9fd;
+      box-shadow: 0 0 18px rgba(53, 185, 236, .12);
+    }
+
+    .project-group__toggle {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      min-height: 66px;
+      padding: 13px 14px;
+      color: #eaf8ff;
+      border: 0;
+      background: transparent;
+      font: 600 .8rem/1.5 var(--font-body, sans-serif);
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .project-group__toggle:hover,
+    .project-group__toggle:focus-visible {
+      background: #254057;
+    }
+
+    .project-group__icon {
+      color: #76d9f9;
+      display: inline-grid;
+      place-items: center;
+    }
+
+    .project-group__icon .icon {
+      width: 21px;
+      height: 21px;
+    }
+
+    .project-group__label {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .project-group__label strong {
+      display: block;
+      font-size: .82rem;
+    }
+
+    .project-group__label small {
+      display: block;
+      margin-top: 4px;
+      color: #aac0d2;
+      font-size: .65rem;
+      font-weight: 400;
+    }
+
+    .project-group__chevron {
+      width: 18px;
+      height: 18px;
+      color: #8db8ce;
+      transform: rotate(0);
+      transition: transform .2s;
+    }
+
+    .project-group.is-open .project-group__chevron {
+      transform: rotate(90deg);
+    }
+
+    .project-group__contents {
+      padding: 0 12px 12px 14px;
+    }
+
+    .project-group__contents[hidden] {
+      display: none !important;
+    }
+
+    .project-group__empty {
+      margin: 0;
+      padding: 13px 12px;
+      border-left: 2px solid #4a7085;
+      border-radius: 0 8px 8px 0;
+      background: #142435;
+      color: #9eb8cb;
+      font-size: .74rem;
+      line-height: 1.6;
+    }
+
+    .project-group__contents .item-card {
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 700px) {
+      .sidebar__separator {
+        width: 26px;
+        margin: 3px auto 7px;
+      }
+
+      .landing__cyber-id {
+        top: 12px;
+        left: 12px;
+        max-width: calc(100% - 24px);
+        padding: 10px 12px 12px;
+      }
+
+      .landing__cyber-name {
+        font-size: clamp(.9rem, 4.3vw, 1.15rem);
+      }
+
+      .landing__cyber-role {
+        font-size: clamp(.48rem, 2.25vw, .65rem);
+        letter-spacing: .055em;
+      }
+
+      .landing__mobile-nav {
+        top: 127px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cyber-char,
+      .cyber-cursor {
+        animation: none !important;
+      }
+
+      .landing__cyber-line {
+        transition: none !important;
+      }
+
+      .landing__stage .scene-hotspot {
+        animation: none !important;
+        visibility: visible;
+      }
+    }
+  </style>
+
+  <script src="data/veille.js" defer></script>
+  <script src="js/app.js" defer></script>
+  <script src="js/hologrammes.js" defer></script>
+</head>
+
+<body>
+
+  <!-- ICÔNES -->
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    style="position:absolute;width:0;height:0;overflow:hidden"
+  >
+    <symbol id="icon-home" viewBox="0 0 24 24">
+      <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>
+    </symbol>
+
+    <symbol id="icon-folder" viewBox="0 0 24 24">
+      <path d="M3 6h7l2 3h9v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+    </symbol>
+
+    <symbol id="icon-briefcase" viewBox="0 0 24 24">
+      <rect x="3" y="7" width="18" height="14" rx="2"/>
+      <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18M10 12v2h4v-2"/>
+    </symbol>
+
+    <symbol id="icon-rss" viewBox="0 0 24 24">
+      <circle cx="5" cy="19" r="2"/>
+      <path d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16"/>
+    </symbol>
+
+    <symbol id="icon-graduation" viewBox="0 0 24 24">
+      <path d="m2 9 10-5 10 5-10 5zM6 11v6c4 3 8 3 12 0v-6M22 9v7"/>
+    </symbol>
+
+    <symbol id="icon-cpu" viewBox="0 0 24 24">
+      <rect x="6" y="6" width="12" height="12" rx="2"/>
+      <rect x="9" y="9" width="6" height="6" rx="1"/>
+      <path d="M9 2v4m6-4v4M9 18v4m6-4v4M2 9h4m-4 6h4m12-6h4m-4 6h4"/>
+    </symbol>
+
+    <symbol id="icon-heart" viewBox="0 0 24 24">
+      <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0l-1 1-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/>
+    </symbol>
+
+    <symbol id="icon-document" viewBox="0 0 24 24">
+      <path d="M6 2h8l5 5v15H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM14 2v6h5M8 13h8m-8 4h8"/>
+    </symbol>
+
+    <symbol id="icon-chevron" viewBox="0 0 24 24">
+      <path d="m9 18 6-6-6-6"/>
+    </symbol>
+  </svg>
+
+  <main id="portfolio">
+
+    <!-- ACCUEIL -->
+    <section
+      id="accueil"
+      class="landing"
+      aria-label="Accueil du portfolio"
+    >
+
+      <div class="landing__stage">
+
+        <!-- DÉCOR ÉTEINT -->
+        <img
+          class="scene-layer scene-layer--decor"
+          src="assets/images/accueil/decor.png"
+          alt=""
+          draggable="false"
+        >
+
+        <!-- SÉQUENCE D'ALLUMAGE (décor éteint -> lumière)
+             1. étincelle sous le bureau
+             2. une onde d'énergie parcourt les néons du sol, des murs et des étagères
+             3. les écrans s'allument un par un (effet tube cathodique)
+             4. l'enseigne PORTFOLIO puis les lampes grésillent
+             5. lumiere.png se fond par-dessus : état final exact -->
+        <div class="scene-boot" aria-hidden="true">
+          <span class="boot__etincelle"></span>
+          <img class="boot__neons" src="assets/images/accueil/allumage-neons.png" alt="" draggable="false">
+          <img class="boot__onde" src="assets/images/accueil/allumage-neons.png" alt="" draggable="false">
+          <img class="boot__ecran" src="assets/images/accueil/lumiere.png" alt="" draggable="false" style="--n: 0; --t: 31.46%; --r: 43.54%; --b: 56.43%; --l: 44.74%; --tm: 37.36%; --bm: 62.34%"><!-- centre -->
+          <img class="boot__ecran" src="assets/images/accueil/lumiere.png" alt="" draggable="false" style="--n: 1; --t: 31.46%; --r: 55.50%; --b: 56.43%; --l: 34.57%; --tm: 37.36%; --bm: 62.34%"><!-- gauche -->
+          <img class="boot__ecran" src="assets/images/accueil/lumiere.png" alt="" draggable="false" style="--n: 2; --t: 31.46%; --r: 33.49%; --b: 56.43%; --l: 56.58%; --tm: 37.36%; --bm: 62.34%"><!-- droite -->
+          <img class="boot__ecran" src="assets/images/accueil/lumiere.png" alt="" draggable="false" style="--n: 3; --t: 27.42%; --r: 66.39%; --b: 65.78%; --l: 28.23%; --tm: 30.67%; --bm: 69.03%"><!-- petit-g-haut -->
+          <img class="boot__ecran" src="assets/images/accueil/lumiere.png" alt="" draggable="false" style="--n: 4; --t: 27.63%; --r: 26.91%; --b: 65.25%; --l: 67.46%; --tm: 31.04%; --bm: 68.66%"><!-- petit-d-haut -->
+          <img class="boot__ecran" src="assets/images/accueil/lumiere.png" alt="" draggable="false" style="--n: 5; --t: 34.64%; --r: 66.39%; --b: 59.19%; --l: 28.11%; --tm: 37.58%; --bm: 62.12%"><!-- petit-g-bas -->
+          <img class="boot__ecran" src="assets/images/accueil/lumiere.png" alt="" draggable="false" style="--n: 6; --t: 34.64%; --r: 26.91%; --b: 58.77%; --l: 67.11%; --tm: 37.79%; --bm: 61.91%"><!-- petit-d-bas -->
+          <img class="boot__ecran" src="assets/images/accueil/lumiere.png" alt="" draggable="false" style="--n: 7; --t: 29.33%; --r: 20.81%; --b: 63.44%; --l: 74.16%; --tm: 32.79%; --bm: 66.91%"><!-- lointain-d -->
+          <img class="boot__ecran" src="assets/images/accueil/lumiere.png" alt="" draggable="false" style="--n: 8; --t: 43.36%; --r: 68.60%; --b: 51.12%; --l: 25.60%; --tm: 45.97%; --bm: 53.73%"><!-- tablette-g -->
+          <img class="boot__ecran" src="assets/images/accueil/lumiere.png" alt="" draggable="false" style="--n: 9; --t: 43.57%; --r: 27.33%; --b: 51.12%; --l: 69.98%; --tm: 46.08%; --bm: 53.62%"><!-- tablette-d -->
+          <img class="boot__ecran" src="assets/images/accueil/lumiere.png" alt="" draggable="false" style="--n: 10; --t: 45.16%; --r: 61.72%; --b: 50.58%; --l: 34.69%; --tm: 47.14%; --bm: 52.56%"><!-- appareil-g -->
+          <img class="boot__ecran" src="assets/images/accueil/lumiere.png" alt="" draggable="false" style="--n: 11; --t: 45.16%; --r: 37.80%; --b: 50.58%; --l: 58.61%; --tm: 47.14%; --bm: 52.56%"><!-- appareil-d -->
+          <img class="boot__enseigne" src="assets/images/accueil/lumiere.png" alt="" draggable="false">
+          <img class="boot__lampe boot__lampe--g" src="assets/images/accueil/lumiere.png" alt="" draggable="false">
+          <img class="boot__lampe boot__lampe--d" src="assets/images/accueil/lumiere.png" alt="" draggable="false">
+        </div>
+
+        <!-- DÉCOR LUMINEUX -->
+        <img
+          class="scene-layer scene-layer--light"
+          src="assets/images/accueil/lumiere.png"
+          alt=""
+          draggable="false"
+        >
+
+
+        <!-- VIDÉO EN BOUCLE -->
+        <video
+          id="decor-video"
+          class="scene-layer scene-layer--video"
+          muted
+          loop
+          playsinline
+          preload="auto"
+          poster="assets/images/accueil/lumiere.png"
+          aria-hidden="true"
+          disablepictureinpicture
+        >
+          <source
+            src="assets/videos/accueil/decor-loop.mp4"
+            type="video/mp4"
+          >
+        </video>
+
+        <!-- AMBIANCE EN BOUCLE (après l'allumage)
+             écrans qui vivent, yeux du robot, impulsions lumineuses dans le sol -->
+        <div class="scene-ambiance" aria-hidden="true">
+          <!-- Impulsions dans les lignes bleues du sol (entre les carreaux).
+               Coordonnées = pixels de lumiere.png. Les zones derrière les
+               hologrammes CA / CRF et le tapis sont volontairement exclues. -->
+          <svg class="vie-sol-lignes" viewBox="0 0 1672 941" preserveAspectRatio="none">
+            <defs>
+              <filter id="lueur-sol" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="3"/>
+              </filter>
+            </defs>
+            <g class="vie-sol-lignes__halo" filter="url(#lueur-sol)">
+              <path class="ligne-sol ligne-sol--profondeur" d="M692.1 587 L585.7 780" pathLength="100" style="--d: 0.0s"/>
+              <path class="ligne-sol ligne-sol--profondeur" d="M783.4 587 L741.8 780" pathLength="100" style="--d: 0.0s"/>
+              <path class="ligne-sol ligne-sol--profondeur" d="M900.0 587 L952.0 780" pathLength="100" style="--d: 0.0s"/>
+              <path class="ligne-sol ligne-sol--profondeur" d="M993.1 587 L1114.4 780" pathLength="100" style="--d: 0.0s"/>
+              <path class="ligne-sol ligne-sol--rangee" d="M836 587 L552 587" pathLength="100" style="--d: 0.0s"/>
+              <path class="ligne-sol ligne-sol--rangee" d="M836 587 L1133 587" pathLength="100" style="--d: 0.0s"/>
+              <path class="ligne-sol ligne-sol--rangee" d="M836 607 L585 607" pathLength="100" style="--d: 0.17s"/>
+              <path class="ligne-sol ligne-sol--rangee" d="M836 607 L1120 607" pathLength="100" style="--d: 0.17s"/>
+              <path class="ligne-sol ligne-sol--rangee" d="M836 634 L585 634" pathLength="100" style="--d: 0.39s"/>
+              <path class="ligne-sol ligne-sol--rangee" d="M836 634 L1120 634" pathLength="100" style="--d: 0.39s"/>
+              <path class="ligne-sol ligne-sol--rangee" d="M836 670 L585 670" pathLength="100" style="--d: 0.69s"/>
+              <path class="ligne-sol ligne-sol--rangee" d="M836 670 L1120 670" pathLength="100" style="--d: 0.69s"/>
+              <path class="ligne-sol ligne-sol--rangee" d="M836 718 L585 718" pathLength="100" style="--d: 1.09s"/>
+              <path class="ligne-sol ligne-sol--rangee" d="M836 718 L1120 718" pathLength="100" style="--d: 1.09s"/>
+            </g>
+            <g class="vie-sol-lignes__coeur">
+              <path class="ligne-sol ligne-sol--profondeur" d="M692.1 587 L585.7 780" pathLength="100" style="--d: 0.0s"/>
+              <path class="ligne-sol ligne-sol--profondeur" d="M783.4 587 L741.8 780" pathLength="100" style="--d: 0.0s"/>
+              <path class="ligne-sol ligne-sol--profondeur" d="M900.0 587 L952.0 780" pathLength="100" style="--d: 0.0s"/>
+              <path class="ligne-sol ligne-sol--profondeur" d="M993.1 587 L1114.4 780" pathLength="100" style="--d: 0.0s"/>
+              <path class="ligne-sol ligne-sol--rangee" d="M836 587 L552 587" pathLength="100" style="--d: 0.0s"/>
+              <path class="ligne-sol ligne-sol--rangee" d="M836 587 L1133 587" pathLength="100" style="--d: 0.0s"/>
+              <path class="ligne-sol ligne-sol--rangee" d="M836 607 L585 607" pathLength="100" style="--d: 0.17s"/>
+              <path class="ligne-sol ligne-sol--rangee" d="M836 607 L1120 607" pathLength="100" style="--d: 0.17s"/>
+              <path class="ligne-sol ligne-sol--rangee" d="M836 634 L585 634" pathLength="100" style="--d: 0.39s"/>
+              <path class="ligne-sol ligne-sol--rangee" d="M836 634 L1120 634" pathLength="100" style="--d: 0.39s"/>
+              <path class="ligne-sol ligne-sol--rangee" d="M836 670 L585 670" pathLength="100" style="--d: 0.69s"/>
+              <path class="ligne-sol ligne-sol--rangee" d="M836 670 L1120 670" pathLength="100" style="--d: 0.69s"/>
+              <path class="ligne-sol ligne-sol--rangee" d="M836 718 L585 718" pathLength="100" style="--d: 1.09s"/>
+              <path class="ligne-sol ligne-sol--rangee" d="M836 718 L1120 718" pathLength="100" style="--d: 1.09s"/>
+            </g>
+          </svg>
+          <span class="vie-ecran" style="--n: 0; left: 44.74%; top: 31.46%; width: 11.72%; height: 12.11%"></span>
+          <span class="vie-ecran" style="--n: 1; left: 34.57%; top: 31.46%; width: 9.93%; height: 12.11%"></span>
+          <span class="vie-ecran" style="--n: 2; left: 56.58%; top: 31.46%; width: 9.93%; height: 12.11%"></span>
+          <span class="vie-ecran" style="--n: 3; left: 28.23%; top: 27.42%; width: 5.38%; height: 6.80%"></span>
+          <span class="vie-ecran" style="--n: 4; left: 67.46%; top: 27.63%; width: 5.62%; height: 7.12%"></span>
+          <span class="vie-ecran" style="--n: 5; left: 28.11%; top: 34.64%; width: 5.50%; height: 6.16%"></span>
+          <span class="vie-ecran" style="--n: 6; left: 67.11%; top: 34.64%; width: 5.98%; height: 6.59%"></span>
+          <span class="vie-ecran" style="--n: 7; left: 74.16%; top: 29.33%; width: 5.02%; height: 7.23%"></span>
+          <span class="vie-robot-oeil vie-robot-oeil--g"></span>
+          <span class="vie-robot-oeil vie-robot-oeil--d"></span>
+          <span class="vie-robot-paupiere"></span>
+          <span class="vie-robot-torse"></span>
+        </div>
+
+        <!-- HOLOGRAMMES ANIMÉS
+             Chaque hologramme = un faisceau fixe + un panneau qui flotte.
+             L'ordre d'apparition est réglé par --ordre (voir animations.css). -->
+        <div class="scene-holos" aria-hidden="true">
+          <div class="holo holo--projets" style="--ordre: 0">
+            <img class="holo__faisceau" src="assets/images/accueil/hologrammes/calques/projets-faisceau.png" alt="" draggable="false">
+            <img class="holo__panneau" src="assets/images/accueil/hologrammes/calques/projets-panneau.png" alt="" draggable="false">
+          </div>
+          <div class="holo holo--formation" style="--ordre: 1">
+            <img class="holo__faisceau" src="assets/images/accueil/hologrammes/calques/formation-faisceau.png" alt="" draggable="false">
+            <img class="holo__panneau" src="assets/images/accueil/hologrammes/calques/formation-panneau.png" alt="" draggable="false">
+          </div>
+          <div class="holo holo--veille" style="--ordre: 2">
+            <img class="holo__faisceau" src="assets/images/accueil/hologrammes/calques/veille-faisceau.png" alt="" draggable="false">
+            <img class="holo__panneau" src="assets/images/accueil/hologrammes/calques/veille-panneau.png" alt="" draggable="false">
+          </div>
+          <div class="holo holo--competences" style="--ordre: 3">
+            <img class="holo__faisceau" src="assets/images/accueil/hologrammes/calques/competences-faisceau.png" alt="" draggable="false">
+            <img class="holo__panneau" src="assets/images/accueil/hologrammes/calques/competences-panneau.png" alt="" draggable="false">
+          </div>
+          <div class="holo holo--ca" style="--ordre: 4">
+            <img class="holo__faisceau" src="assets/images/accueil/hologrammes/calques/ca-faisceau.png" alt="" draggable="false">
+            <img class="holo__panneau" src="assets/images/accueil/hologrammes/calques/ca-panneau.png" alt="" draggable="false">
+          </div>
+          <div class="holo holo--crf" style="--ordre: 5">
+            <img class="holo__faisceau" src="assets/images/accueil/hologrammes/calques/crf-faisceau.png" alt="" draggable="false">
+            <img class="holo__panneau" src="assets/images/accueil/hologrammes/calques/crf-panneau.png" alt="" draggable="false">
+          </div>
+          <div class="holo holo--cv" style="--ordre: 6">
+            <img class="holo__faisceau" src="assets/images/accueil/hologrammes/calques/cv-faisceau.png" alt="" draggable="false">
+            <img class="holo__panneau" src="assets/images/accueil/hologrammes/calques/cv-panneau.png" alt="" draggable="false">
+          </div>
+        </div>
+
+        <!-- IMAGE DE SURVOL -->
+        <img
+          id="scene-hover-image"
+          class="scene-hover-image"
+          alt=""
+          aria-hidden="true"
+          draggable="false"
+        >
+
+        <!-- ZONES CLIQUABLES -->
+        <nav
+          class="scene-hitboxes"
+          aria-label="Navigation holographique"
+        >
+          <button
+            type="button"
+            class="scene-hotspot scene-hotspot--projets"
+            data-open-tab="projets"
+            data-hover-image="assets/images/accueil/hologrammes/projets-survol.png"
+            aria-label="Projets"
+          ></button>
+
+          <button
+            type="button"
+            class="scene-hotspot scene-hotspot--veille"
+            data-open-tab="veille"
+            data-hover-image="assets/images/accueil/hologrammes/veille-survol.png"
+            aria-label="Veille technologique"
+          ></button>
+
+          <button
+            type="button"
+            class="scene-hotspot scene-hotspot--formation"
+            data-open-tab="formation"
+            data-hover-image="assets/images/accueil/hologrammes/formation-survol.png"
+            aria-label="Formation"
+          ></button>
+
+          <button
+            type="button"
+            class="scene-hotspot scene-hotspot--competences"
+            data-open-tab="competences"
+            data-hover-image="assets/images/accueil/hologrammes/competences-survol.png"
+            aria-label="Compétences"
+          ></button>
+
+          <a
+            class="scene-hotspot scene-hotspot--cv"
+            href="assets/documents/cv.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-hover-image="assets/images/accueil/hologrammes/cv-survol.png"
+            aria-label="Ouvrir mon CV"
+          ></a>
+
+          <button
+            type="button"
+            class="scene-hotspot scene-hotspot--ca"
+            data-open-tab="experience"
+            data-hover-image="assets/images/accueil/hologrammes/ca-survol.png"
+            aria-label="Crédit Agricole Life Insurance"
+          ></button>
+
+          <button
+            type="button"
+            class="scene-hotspot scene-hotspot--crf"
+            data-open-tab="engagement"
+            data-hover-image="assets/images/accueil/hologrammes/crf-survol.png"
+            aria-label="Croix-Rouge française et engagement associatif EF4"
+          ></button>
+        </nav>
+      </div>
+
+      <!-- IDENTITÉ CYBER -->
+      <header
+        id="cyber-identity"
+        class="landing__cyber-id"
+        aria-label="Identité de Reyen Fourati"
+      >
+        <h1
+          id="cyber-name"
+          class="landing__cyber-name"
+          aria-label="Reyen Fourati"
+        >
+          <span
+            id="cyber-name-typed"
+            aria-hidden="true"
+          ></span>
+          <span
+            id="cyber-name-cursor"
+            class="cyber-cursor"
+            aria-hidden="true"
+          ></span>
+        </h1>
+
+        <p
+          id="cyber-role"
+          class="landing__cyber-role"
+          aria-label="Étudiant BTS SIO - SISR"
+        >
+          <span
+            id="cyber-role-typed"
+            aria-hidden="true"
+          ></span>
+          <span
+            id="cyber-role-cursor"
+            class="cyber-cursor"
+            aria-hidden="true"
+          ></span>
+        </p>
+
+        <div
+          class="landing__cyber-line"
+          aria-hidden="true"
+        ></div>
+      </header>
+
+      <!-- PERSONNAGE CENTRAL -->
+      <img
+        class="landing__portrait"
+        src="assets/images/accueil/photo-centre.png"
+        alt="Illustration de Reyen Fourati assis"
+        draggable="false"
+      >
+
+      <!-- MENU MOBILE -->
+      <nav
+        class="landing__mobile-nav"
+        aria-label="Navigation mobile"
+      >
+        <button type="button" data-open-tab="projets">
+          Projets
+        </button>
+
+        <button type="button" data-open-tab="veille">
+          Veille technologique
+        </button>
+
+        <button type="button" data-open-tab="experience">
+          Expérience professionnelle
+        </button>
+
+        <button type="button" data-open-tab="formation">
+          Formation
+        </button>
+
+        <button type="button" data-open-tab="competences">
+          Compétences
+        </button>
+
+        <button
+          type="button"
+          class="landing__mobile-engagement"
+          data-open-tab="engagement"
+        >
+          Engagement associatif · EF4
+        </button>
+
+        <a
+          href="assets/documents/cv.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          CV
+        </a>
+      </nav>
+    </section>
+
+    <!-- INTERFACE À TROIS COLONNES -->
+    <section
+      id="interface"
+      class="workspace"
+      aria-label="Rubriques du portfolio"
+      hidden
+    >
+
+      <!-- CV -->
+      <a
+        class="cv-link"
+        href="assets/documents/cv.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Ouvrir mon CV"
+      >
+        <svg class="icon" aria-hidden="true">
+          <use href="#icon-document"></use>
+        </svg>
+        <span>CV</span>
+      </a>
+
+      <!-- BARRE LATERALE -->
+      <aside class="sidebar" aria-label="Navigation principale">
+        <nav class="sidebar__nav" aria-label="Rubriques">
+
+          <!-- ACCUEIL -->
+          <button
+            type="button"
+            class="sidebar__button sidebar__button--avatar"
+            data-tab="accueil"
+            data-label="Accueil"
+            aria-label="Accueil"
+          >
+            <img class="sidebar__avatar" src="assets/images/navigation/avatar-accueil.webp" alt="" width="216" height="216" decoding="async">
+            <span class="sidebar__avatar-label" aria-hidden="true">Accueil</span>
+          </button>
+
+          <!-- SÉPARATEUR -->
+          <span
+            class="sidebar__separator"
+            role="separator"
+            aria-orientation="horizontal"
+            aria-label="Séparation entre accueil et rubriques"
+          ></span>
+
+          <!-- PROJETS -->
+          <button
+            type="button"
+            class="sidebar__button sidebar__button--avatar is-active"
+            data-tab="projets"
+            data-label="Projets"
+            aria-label="Projets"
+          >
+            <img class="sidebar__avatar" src="assets/images/navigation/avatar-projets.webp" alt="" width="216" height="216" decoding="async">
+            <span class="sidebar__avatar-label" aria-hidden="true">Projets</span>
+          </button>
+
+          <!-- VEILLE -->
+          <button
+            type="button"
+            class="sidebar__button sidebar__button--avatar"
+            data-tab="veille"
+            data-label="Veille technologique"
+            aria-label="Veille technologique"
+          >
+            <img class="sidebar__avatar" src="assets/images/navigation/avatar-veille.webp" alt="" width="216" height="216" decoding="async">
+            <span class="sidebar__avatar-label" aria-hidden="true">Veille</span>
+          </button>
+
+          <!-- EXPÉRIENCE PROFESSIONNELLE -->
+          <button
+            type="button"
+            class="sidebar__button sidebar__button--avatar"
+            data-tab="experience"
+            data-label="Expérience professionnelle"
+            aria-label="Expérience professionnelle"
+          >
+            <img class="sidebar__avatar" src="assets/images/navigation/avatar-experience.webp" alt="" width="216" height="216" decoding="async">
+            <span class="sidebar__avatar-label" aria-hidden="true">Expérience</span>
+          </button>
+
+          <!-- FORMATION -->
+          <button
+            type="button"
+            class="sidebar__button sidebar__button--avatar"
+            data-tab="formation"
+            data-label="Formation"
+            aria-label="Formation"
+          >
+            <img class="sidebar__avatar" src="assets/images/navigation/avatar-formation.webp" alt="" width="216" height="216" decoding="async">
+            <span class="sidebar__avatar-label" aria-hidden="true">Formation</span>
+          </button>
+
+          <!-- COMPÉTENCES -->
+          <button
+            type="button"
+            class="sidebar__button sidebar__button--avatar"
+            data-tab="competences"
+            data-label="Compétences"
+            aria-label="Compétences"
+          >
+            <img class="sidebar__avatar" src="assets/images/navigation/avatar-competences.webp" alt="" width="216" height="216" decoding="async">
+            <span class="sidebar__avatar-label" aria-hidden="true">Compétences</span>
+          </button>
+
+          <!-- SÉPARATEUR ROUGE -->
+          <span
+            class="sidebar__separator sidebar__separator--engagement"
+            role="separator"
+            aria-orientation="horizontal"
+            aria-label="Séparation entre rubriques et engagement associatif"
+          ></span>
+
+          <!-- ENGAGEMENT ASSOCIATIF -->
+          <button
+            type="button"
+            class="sidebar__button sidebar__button--avatar sidebar__button--engagement"
+            data-tab="engagement"
+            data-label="Engagement associatif (EF4)"
+            aria-label="Engagement associatif EF4"
+          >
+            <img class="sidebar__avatar" src="assets/images/navigation/avatar-engagement.webp" alt="" width="216" height="216" decoding="async">
+            <span class="sidebar__avatar-label" aria-hidden="true">Engagement</span>
+          </button>
+        </nav>
+      </aside>
+
+      <!-- COLONNE 2 -->
+      <section
+        class="list-panel"
+        aria-labelledby="section-title"
+      >
+        <div class="list-panel__header">
+          <p class="eyebrow">BTS SIO · SISR</p>
+
+          <h2 id="section-title">
+            Projets
+          </h2>
+
+          <p
+            id="section-subtitle"
+            class="list-panel__subtitle"
+          >
+            Mes réalisations informatiques
+          </p>
+        </div>
+
+        <div
+          id="items-list"
+          class="list-panel__items"
+          aria-label="Liste des sujets"
+        ></div>
+
+        <div
+          class="list-panel__footer"
+          id="items-count"
+          aria-live="polite"
+        >
+          0 élément
+        </div>
+      </section>
+
+      <!-- COLONNE 3 -->
+      <section
+        class="reader-panel"
+        aria-labelledby="reader-title"
+      >
+        <div class="reader-panel__topbar">
+
+          <button
+            type="button"
+            class="reader-back"
+            id="reader-back"
+            aria-label="Retour à la liste"
+          >
+            <svg class="icon" aria-hidden="true">
+              <use href="#icon-chevron"></use>
+            </svg>
+          </button>
+
+          <span id="reader-category">
+            PROJETS
+          </span>
+
+          <span id="reader-date"></span>
+        </div>
+
+        <article
+          id="reader-content"
+          class="reader-panel__article"
+          aria-live="polite"
+        >
+          <h2 id="reader-title">
+            Projets
+          </h2>
+
+          <p>
+            Sélectionnez un sujet pour afficher son contenu ici.
+          </p>
+        </article>
+      </section>
+    </section>
+  </main>
+
+  <!-- ANIMATION DE L'IDENTITÉ ET VIDÉO -->
+  <script>
+    (() => {
+      const accueil = document.getElementById("accueil");
+      const video = document.getElementById("decor-video");
+      const panneau = document.getElementById("cyber-identity");
+
+      const nomTexte = document.getElementById("cyber-name-typed");
+      const roleTexte = document.getElementById("cyber-role-typed");
+
+      const nomCurseur = document.getElementById("cyber-name-cursor");
+      const roleCurseur = document.getElementById("cyber-role-cursor");
+
+      if (!accueil || !video || !panneau) return;
+
+      const NOM = "REYEN FOURATI";
+      const ROLE = "ÉTUDIANT BTS SIO - SISR";
+
+      const INTRO_VIDEO = 3200;
+      const VITESSE_NOM = 150;
+      const VITESSE_ROLE = 95;
+      const ATTENTE_DEPART = 750;
+      const PAUSE_ENTRE_LIGNES = 450;
+      const PAUSE_AVANT_TRAIT = 200;
+
+      let animationCourante = 0;
+      let accueilVisible = false;
+      let introductionTerminee = false;
+      let lectureDemandee = false;
+
+      const mouvementReduit = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      function attendre(duree) {
+        return new Promise(resolve =>
+          window.setTimeout(resolve, duree)
+        );
+      }
+
+      function estAccueilVisible() {
+        return !accueil.hidden &&
+          window.getComputedStyle(accueil).display !== "none";
+      }
+
+      function ajouterCaractere(conteneur, lettre, estNom) {
+        const caractere = document.createElement("span");
+        caractere.className = "cyber-char";
+
+        caractere.textContent =
+          lettre === " " ? "\u00a0" : lettre;
+
+        caractere.setAttribute("aria-hidden", "true");
+
+        if (estNom) {
+          caractere.classList.add("cyber-char--surname");
+        }
+
+        conteneur.appendChild(caractere);
+      }
+
+      async function ecrireLigne(
+        conteneur,
+        curseur,
+        texte,
+        vitesse,
+        numero,
+        nomDeFamille
+      ) {
+        curseur.classList.add("is-active");
+
+        for (let i = 0; i < texte.length; i++) {
+          if (numero !== animationCourante) {
+            return false;
+          }
+
+          ajouterCaractere(
+            conteneur,
+            texte[i],
+            nomDeFamille && i >= 6
+          );
+
+          await attendre(vitesse);
+        }
+
+        if (numero !== animationCourante) {
+          return false;
+        }
+
+        curseur.classList.remove("is-active");
+        return true;
+      }
+
+      function eteindreIdentite() {
+        animationCourante++;
+
+        nomCurseur.classList.remove("is-active");
+        roleCurseur.classList.remove("is-active");
+
+        panneau.classList.add("is-off");
+      }
+
+      async function demarrerIdentite() {
+        animationCourante++;
+        const numero = animationCourante;
+
+        nomTexte.textContent = "";
+        roleTexte.textContent = "";
+
+        nomCurseur.classList.remove("is-active");
+        roleCurseur.classList.remove("is-active");
+
+        panneau.classList.remove("is-complete", "is-off");
+
+        if (mouvementReduit) {
+          [...NOM].forEach((lettre, i) => {
+            ajouterCaractere(nomTexte, lettre, i >= 6);
+          });
+
+          roleTexte.textContent = ROLE;
+          panneau.classList.add("is-complete");
+          return;
+        }
+
+        await attendre(ATTENTE_DEPART);
+
+        if (numero !== animationCourante) return;
+
+        if (!await ecrireLigne(
+          nomTexte,
+          nomCurseur,
+          NOM,
+          VITESSE_NOM,
+          numero,
+          true
+        )) return;
+
+        await attendre(PAUSE_ENTRE_LIGNES);
+
+        if (numero !== animationCourante) return;
+
+        if (!await ecrireLigne(
+          roleTexte,
+          roleCurseur,
+          ROLE,
+          VITESSE_ROLE,
+          numero,
+          false
+        )) return;
+
+        await attendre(PAUSE_AVANT_TRAIT);
+
+        if (numero !== animationCourante) return;
+
+        panneau.classList.add("is-complete");
+      }
+
+      /* VIDÉO EN BOUCLE */
+      video.muted = true;
+      video.loop = true;
+
+      function lancerVideo() {
+        if (
+          !introductionTerminee ||
+          !estAccueilVisible() ||
+          video.readyState < 2 ||
+          lectureDemandee ||
+          mouvementReduit
+        ) {
+          return;
+        }
+
+        lectureDemandee = true;
+        const demarrage = video.play();
+
+        if (
+          demarrage &&
+          typeof demarrage.then === "function"
+        ) {
+          demarrage.then(() => {
+            if (estAccueilVisible()) {
+              video.classList.add("is-playing");
+            }
+          }).catch(() => {
+            lectureDemandee = false;
+            console.warn(
+              "[Portfolio] Impossible de lire decor-loop.mp4."
+            );
+          });
+        } else {
+          video.classList.add("is-playing");
+        }
+      }
+
+      video.addEventListener("loadeddata", lancerVideo);
+      video.addEventListener("canplay", lancerVideo);
+
+      window.setTimeout(() => {
+        introductionTerminee = true;
+
+        if (mouvementReduit) {
+          video.pause();
+          return;
+        }
+
+        try {
+          video.currentTime = 0;
+        } catch (erreur) {
+          // Vidéo non encore prête
+        }
+
+        lancerVideo();
+      }, INTRO_VIDEO);
+
+      function synchroniserAccueil() {
+        const visible = estAccueilVisible();
+
+        if (visible === accueilVisible) return;
+
+        accueilVisible = visible;
+
+        if (visible) {
+          demarrerIdentite();
+
+          if (introductionTerminee) {
+            lancerVideo();
+          }
+        } else {
+          eteindreIdentite();
+          video.pause();
+          lectureDemandee = false;
+          video.classList.remove("is-playing");
+        }
+      }
+
+      new MutationObserver(synchroniserAccueil).observe(
+        accueil,
+        {
+          attributes: true,
+          attributeFilter: ["hidden", "style", "class"]
+        }
+      );
+
+      document.addEventListener(
+        "click",
+        evenement => {
+          const selection = evenement.target.closest(
+            "#accueil [data-open-tab], " +
+            "#accueil .scene-hotspot--cv, " +
+            "#accueil .landing__mobile-nav a"
+          );
+
+          if (selection) {
+            eteindreIdentite();
+          }
+        },
+        true
+      );
+
+      synchroniserAccueil();
+    })();
+  </script>
+
+</body>
+</html>

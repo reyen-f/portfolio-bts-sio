@@ -1,0 +1,8 @@
+# Anciennes versions d'images gardées en local (non publiées)
+assets/images/accueil/0*.png
+assets/images/accueil/hologrammes/0*.png
+
+# Fichiers système
+Thumbs.db
+desktop.ini
+.DS_Store

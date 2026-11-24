@@ -1,0 +1,6 @@
+# Pris en compte par Netlify et Cloudflare Pages (ignoré ailleurs).
+# Interdit l'indexation de TOUS les fichiers, y compris les PDF et les
+# images, que la balise <meta name="robots"> ne couvre pas.
+/*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex
+  Referrer-Policy: no-referrer
